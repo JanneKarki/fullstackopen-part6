@@ -3,7 +3,7 @@ import { useNotificationActions } from '../notificationStore'
 
 const AnecdoteList = () => {
   const anecdotes = useAnecdotes()
-  const { vote } = useAnecdoteActions()
+  const { vote, remove } = useAnecdoteActions()
   const { notify } = useNotificationActions()
   const sortedAnecdotes = anecdotes.toSorted((a, b) => b.votes - a.votes)
 
@@ -18,6 +18,9 @@ const AnecdoteList = () => {
       <div>
         has {anecdote.votes}
         <button onClick={() => voteFor(anecdote)}>vote</button>
+        {anecdote.votes === 0 && (
+          <button onClick={() => remove(anecdote.id)}>delete</button>
+        )}
       </div>
     </div>
   ))
