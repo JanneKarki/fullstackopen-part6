@@ -1,6 +1,9 @@
+import { useContext } from 'react'
+import NotificationContext from '../NotificationContext'
 import { useAnecdotes } from '../hooks/useAnecdotes'
 
 const AnecdoteForm = () => {
+  const { notify } = useContext(NotificationContext)
   const { addAnecdote } = useAnecdotes()
 
   const onCreate = (event) => {
@@ -8,6 +11,7 @@ const AnecdoteForm = () => {
     const content = event.target.anecdote.value
     event.target.reset()
     addAnecdote(content)
+    notify(`anecdote '${content}' created`)
   }
 
   return (
