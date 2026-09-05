@@ -4,13 +4,12 @@ import AnecdoteList from './components/AnecdoteList'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
 import { useAnecdoteActions } from './store'
-import anecdoteService from './services/anecdotes'
 
 const App = () => {
   const { initialize } = useAnecdoteActions()
 
   useEffect(() => {
-    anecdoteService.getAll().then(anecdotes => initialize(anecdotes))
+    initialize()
   }, [initialize])
 
   return (

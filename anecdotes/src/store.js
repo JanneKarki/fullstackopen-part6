@@ -28,7 +28,10 @@ const useAnecdoteStore = create((set, get) => ({
       }))
     },
     setFilter: value => set(() => ({ filter: value })),
-    initialize: anecdotes => set(() => ({ anecdotes }))
+    initialize: async () => {
+      const anecdotes = await anecdoteService.getAll()
+      set(() => ({ anecdotes }))
+    }
   }
 }))
 
@@ -42,3 +45,5 @@ export const useAnecdotes = () => {
 }
 
 export const useAnecdoteActions = () => useAnecdoteStore((state) => state.actions)
+
+export default useAnecdoteStore
