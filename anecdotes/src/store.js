@@ -1,14 +1,6 @@
 
 import { create } from 'zustand'
 
-const getId = () => (100000 * Math.random()).toFixed(0)
-
-const asObject = anecdote => ({
-  content: anecdote,
-  id: getId(),
-  votes: 0
-})
-
 const useAnecdoteStore = create((set) => ({
   anecdotes: [],
   filter: '',
@@ -20,8 +12,8 @@ const useAnecdoteStore = create((set) => ({
           : anecdote
       )
     })),
-    add: content => set(state => ({
-      anecdotes: state.anecdotes.concat(asObject(content))
+    add: anecdote => set(state => ({
+      anecdotes: state.anecdotes.concat(anecdote)
     })),
     setFilter: value => set(() => ({ filter: value })),
     initialize: anecdotes => set(() => ({ anecdotes }))
