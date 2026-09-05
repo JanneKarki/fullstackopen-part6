@@ -58,3 +58,21 @@ describe('useAnecdotes sorting', () => {
     ])
   })
 })
+
+describe('useAnecdotes filtering', () => {
+  it('returns anecdotes matching the filter', () => {
+    const anecdotes = [
+      { id: '1', content: 'Testing is useful', votes: 0 },
+      { id: '2', content: 'Zustand manages state', votes: 3 },
+      { id: '3', content: 'Test-driven development', votes: 1 }
+    ]
+    useAnecdoteStore.setState({ anecdotes, filter: 'test' })
+
+    const { result } = renderHook(() => useAnecdotes())
+
+    expect(result.current).toEqual([
+      anecdotes[2],
+      anecdotes[0]
+    ])
+  })
+})
